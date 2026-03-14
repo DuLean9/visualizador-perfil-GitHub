@@ -144,3 +144,43 @@ main {
 .container .profile-results.hide {
   display: none;
 }
+
+/* Profile Results Styles */
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    width: 100%;
+    max-width: 500px;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    margin: 2rem auto;
+}
+
+.profile-card .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.profile-card .profile-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 2px;
+}
+
+.profile-card .profile-info h2 {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.profile-card .profile-info p {
+    font-size: var(--font-md);
+    color: var(--muted-foreground);
+}
+

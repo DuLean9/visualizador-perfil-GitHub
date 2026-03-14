@@ -6,40 +6,36 @@ const profileResults = document.querySelector(".profile-results");
 const baseUrl = 'https://api.github.com'
 
 async function getUser(userName) {
-    const response = await fetch(`${baseUrl}/users/${userName}`)
-
+    
     try{
+        const response = await fetch(`${baseUrl}/users/${userName}`)
         
         if (!response.ok) {
-            throw new Error('Usuário não encontrado')
+            throw new Error('Ocorreu um erro ao buscar o usuário')
         }
         
         const data = await response.json()
-        console.log(data);
-        console.log(data.avatar_url)
-        console.log(data.name)
-        console.log(data.bio)
-        console.log(data.followers)
-        console.log(data.following)
-            
-            
+          
         return data
 
     }  catch (error) {
         console.error('Erro ao buscar perfil de usuário:', error);
-        alert('Usuário não encontrado')
+        return 'error'
     }
 }
 
 async function handleSearch() {
-    const searchValue = inputSearch.value
+    const searchValue = inputSearch.value.trim()
 
     if (searchValue) {
-        console.log('O valor é:', searchValue);
+        profileResults.innerHTML = `<div class="loading">Carregando...</div>`
+
 
         const user = await getUser(searchValue)
 
-        if (user) {
+        if (user === 'error') {
+            profileResults.innerHTML = `<div class="error">O usuário ${searchValue} não foi encontrado</div>`
+        } else {
             profileResults.innerHTML = `
                 <div class="profile-card">
                     <img src="${user.avatar_url}" alt="Avatar do ${user.name}" class="profile-avatar">
