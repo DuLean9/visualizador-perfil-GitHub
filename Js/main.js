@@ -28,6 +28,8 @@ async function handleSearch() {
     const searchValue = inputSearch.value.trim()
 
     if (searchValue) {
+        inputSearch.value = ''
+
         profileResults.innerHTML = `<div class="loading">Carregando...</div>`
 
 
