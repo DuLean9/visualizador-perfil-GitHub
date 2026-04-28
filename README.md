@@ -8,8 +8,9 @@ Este projeto é uma implementação de front-end para buscar e exibir perfis de 
 
 ## Preview 📷
 
-### Mobile
+### Desktop
 ![Mobile](src/assets/Animação-desktop.gif)
+### Mobile
 ![Mobile](src/assets/Animação-mobile.gif)
 
 ## Funcionalidades ⚙️
