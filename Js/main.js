@@ -1,30 +1,47 @@
-const inputSearch = document.querySelector("#input-search");
-const btnSearch = document.querySelector("#btn-search");
-const profileResults = document.querySelector(".profile-results");
-
+const inputSearch = document.getElementById('input-search');
+const btnSearch = document.getElementById('btn-search');
+const profileResults = document.querySelector('.profile-results');
 
 const baseUrl = 'https://api.github.com'
 
-async function getUser(userName) {
-    
-    try{
+const getUser = async (userName) => {
+    try {
         const response = await fetch(`${baseUrl}/users/${userName}`)
-        
+        console.log(response);
+
+
         if (!response.ok) {
-            throw new Error('Ocorreu um erro ao buscar o usuário')
+            throw new Error('Ocorreu um erro na busca do usuraio')
         }
-        
+
         const data = await response.json()
-          
         return data
 
-    }  catch (error) {
-        console.error('Erro ao buscar perfil de usuário:', error);
-        return 'error'
+
+    } catch (error) {
+        console.error('Houve um erro:', error);
     }
 }
 
-async function handleSearch() {
+const getRepos = async (userName) => {
+    try {
+
+        const response = await fetch(`${baseUrl}/users/${userName}/repos?per_page=10&sort=created`)
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro na busca de repositorios do usuraio')
+        }
+
+        const data = await response.json()
+        return data
+
+    } catch (error) {
+        console.error('Houve um erro:', error);
+    }
+}
+
+const handleSearch = async () => {
     const searchValue = inputSearch.value.trim()
 
     if (searchValue) {
@@ -32,34 +49,38 @@ async function handleSearch() {
 
         profileResults.innerHTML = `<div class="loading">Carregando...</div>`
 
+        const user = await Promise.all([getUser(searchValue), getRepos(searchValue)])
+        console.log(user);
 
-        const user = await getUser(searchValue)
 
-        if (user === 'error') {
-            profileResults.innerHTML = `<div class="error">O usuário ${searchValue} não foi encontrado</div>`
-        } else {
+        if (user) {
             profileResults.innerHTML = `
                 <div class="profile-card">
-                    <img src="${user.avatar_url}" alt="Avatar do ${user.name}" class="profile-avatar">
+                    <img src="${user.avatar_url}" alt="${user.name}" class="profile-avatar">
                     <div class="profile-info">
-                        <h2>${user.name}</h2>
-                        <p>${user.bio || 'Sem bio cadastrada 😢'}</p>
+                        <h2>${user.name || 'Sem nome cadastrado 😞'}</h2>
+                        <p>${user.bio || 'Sem bio cadastrada 😞'}</p>
                     </div>
-                </div>`
+                </div>
+            `
+        } else {
+            profileResults.innerHTML = `<div class="error">O usuario ${searchValue} não foi encontrado 😢</div>`
         }
-        
     } else {
         alert('Digite um usuário no GitHub')
     }
-};
 
-btnSearch.addEventListener('click', handleSearch);
+}
 
+
+btnSearch.addEventListener('click', handleSearch)
 
 inputSearch.addEventListener('keyup', (e) => {
-
     if (e.key === 'Enter') {
-        handleSearch();
+        handleSearch()
     }
-    
-});
+})
+
+
+
+
