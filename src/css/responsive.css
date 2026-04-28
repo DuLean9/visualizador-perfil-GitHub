@@ -14,6 +14,10 @@
   .repositories ul {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .repos-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Tablet portrait */
@@ -30,6 +34,14 @@
   .repositories ul { 
     grid-template-columns: 1fr; 
   }
+
+  .repos-list {
+    grid-template-columns: 1fr;
+  }
+
+  .repo-item {
+    min-height: auto;
+  }
   
   .container .profile-data .info { 
     flex-direction: column; 
@@ -41,6 +53,19 @@
   
   .container header h2 {
     font-size: var(--font-lg);
+  }
+
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-card .profile-info {
+    text-align: center;
+  }
+
+  .profile-counters {
+    margin: 40px 0;
   }
 }
 
