@@ -84,4 +84,4 @@ code .
 ```
 
 ## Demonstração 👁️
-🔗 Acesse o projeto aqui: (https://dulean9.github.io/visualizador-perfil-GitHub/)
+🔗 Acesse o projeto aqui: ()
