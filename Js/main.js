@@ -62,6 +62,17 @@ const handleSearch = async () => {
                         <p>${user.bio || 'Sem bio cadastrada 😞'}</p>
                     </div>
                 </div>
+
+                <div class='profile-counter'>
+                    <div class='followers'>
+                        <h4>Seguidores</h4>
+                        <span>${user.followers}</span>
+                    </div>
+                    <div class='following'>
+                        <h4>Seguindo</h4>
+                        <span>${user.following}</span>
+                    </div>
+                </div>
             `
         } else {
             profileResults.innerHTML = `<div class="error">O usuario ${searchValue} não foi encontrado 😢</div>`
